@@ -17,3 +17,4 @@
 * **User can clear (delete) all completed todos with a button: "Clear completed todos" (2 points)**
 * **App must be hosted live or no points will be awarded.**
 * **All of the above requirements must use/modify an Array of objects as a source of data**
+* **App must be in the root of your repo.**
