@@ -6,7 +6,8 @@
   * Must clear input element after adding
   * Must add onClick with button as well as on enter press
 * **User can edit todos (6 points)**
-  * No prompt boxes or alerts
+  * No prompt or alert boxes
+  * Use of the contenteditable HTML attribute is not allowed
   * Can't use the new todo inputs value to edit
   * Edit input field must not be visible at all times, only when editing
 * **User can complete todos (2 points)**
