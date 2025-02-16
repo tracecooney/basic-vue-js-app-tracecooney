@@ -1,30 +1,65 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import shoppingList from './components/shoppingList.vue'
+import shoppingForm from './components/ShoppingForm.vue'
+
+export default {
+  name: 'App',
+  components: {
+    shoppingList,
+    shoppingForm
+  },
+  data() {
+    return {
+      shoppingItems: [
+        { 
+          id: 1,
+          name: 'Jelly',
+          amount: 1,
+        },
+        { 
+          id: 2,
+          name: 'Peanut Butter',
+          amount: 2,
+        },
+        { 
+          id: 3,
+          name: 'Bread',
+          amount: 1,
+        },
+      ],
+    }
+  },
+  methods: {
+    addItem(item) {
+      this.shoppingItems.push({
+        id: this.shoppingItems.length + 1,
+        name: item.name,
+        amount: item.amount,
+      })
+    },
+    deleteItem(id) {
+      this.shoppingItems = this.shoppingItems.filter(item => item.id !== id)
+    },
+  },
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+<div id="app" class="small-container">
+  <h2>Shopping List</h2>
+  <shoppingList :items="shoppingItems" @delete:item="deleteItem"/>
+  <shoppingForm @add-item="addItem"/>
+</div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.small-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 </style>
