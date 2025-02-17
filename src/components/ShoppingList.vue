@@ -14,9 +14,10 @@ export default {
         this.editting = id;
     },
     editItem(item) {
-      // Add logic for editing the item here.
-      console.log(item);
+        this.$emit('edit:item', item);
+        this.editting = null;
     }
+
   }
 }
 </script>
