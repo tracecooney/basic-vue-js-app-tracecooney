@@ -6,7 +6,7 @@ export default {
   name: 'App',
   components: {
     shoppingList,
-    shoppingForm
+    shoppingForm'l,v
   },
   data() {
     return {
