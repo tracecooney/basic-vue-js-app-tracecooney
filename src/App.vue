@@ -31,14 +31,23 @@ export default {
   },
   methods: {
     addItem(item) {
+      // Find the highest id and increment
+      const newId = Math.max(...this.shoppingItems.map(i => i.id), 0) + 1;
+      
       this.shoppingItems.push({
-        id: this.shoppingItems.length + 1,
+        id: newId,
         name: item.name,
         amount: item.amount,
-      })
+      });
     },
     deleteItem(id) {
-      this.shoppingItems = this.shoppingItems.filter(item => item.id !== id)
+      this.shoppingItems = this.shoppingItems.filter(item => item.id !== id);
+    },
+    editItem(updatedItem) {
+      const index = this.shoppingItems.findIndex(item => item.id === updatedItem.id);
+      if (index !== -1) {
+        this.shoppingItems[index] = updatedItem;
+      }
     },
   },
 }
@@ -47,7 +56,7 @@ export default {
 <template>
 <div id="app" class="small-container">
   <h2>Shopping List</h2>
-  <shoppingList :items="shoppingItems" @delete:item="deleteItem"/>
+  <shoppingList :items="shoppingItems" @delete:item="deleteItem" @edit:item="editItem"/>
   <shoppingForm @add-item="addItem"/>
 </div>
 </template>

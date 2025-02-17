@@ -2,8 +2,22 @@
 export default {
     name: 'shopping-List',
     props: {
-      items: Array,
+      items: Array
   },
+  data() {
+    return {
+        editting: null
+    }
+  },
+  methods: {
+    editMode(id) {
+        this.editting = id;
+    },
+    editItem(item) {
+      // Add logic for editing the item here.
+      console.log(item);
+    }
+  }
 }
 </script>
 
@@ -19,11 +33,20 @@ export default {
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td>{{item.name}}</td>
-          <td>{{item.amount}}</td>
-            <td>
-                <button @click="$emit('delete:item', item.id)">Delete</button>
-            </td>
+          <!-- This should be inside the correct conditional structure -->
+          <td>{{ item.amount }}</td>
+          
+          <!-- Edit Mode (when editting is active) -->
+          <td v-if="editting === item.id">
+            <button @click="editItem(item)"> Save </button>
+            <button class="muted-button" @click="editting = null"> Cancel </button>
+          </td>
+
+          <!-- Default (when not in edit mode) -->
+          <td v-else>
+            <button @click="editMode(item.id)"> Edit </button>
+            <button @click="$emit('delete:item', item.id)"> Delete </button>
+          </td>
         </tr>
       </tbody>
     </table>

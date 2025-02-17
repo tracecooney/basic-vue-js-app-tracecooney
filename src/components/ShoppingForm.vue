@@ -3,16 +3,20 @@ export default {
     name: 'Shopping-form',
     data() {
         return {
-            Items: {  // Ensure naming consistency
+            item: {  // Renamed to `item` for consistency
                 name: '',
-                amount: '',
+                amount: '',  // amount will be treated as a string until we convert it to a number
             },
         }
     },
     methods: {
         addItem() {
-            this.$emit('add-item', this.Items)
-            this.Items = { 
+            this.$emit('add-item', {
+                name: this.item.name,
+                amount: Number(this.item.amount) || 0,  // Ensure amount is a number
+            })
+            // Reset the form
+            this.item = { 
                 name: '',
                 amount: '',
             }
@@ -25,14 +29,16 @@ export default {
   <div id="shopping-form">
     <form @submit.prevent="addItem">
       <label> Shopping Item </label>
-      <input type="text" v-model="Items.name"/>  <!-- Corrected reference -->
+      <input type="text" v-model="item.name"/>  <!-- Renamed reference -->
+      
       <label> Item Amount </label>
-      <input type="number" v-model="Items.amount"/>  <!-- Corrected reference -->
+      <input type="number" v-model="item.amount"/>  <!-- Renamed reference -->
+      
       <button> Add Item </button>
     </form>
   </div>
 </template>
 
 <style scoped>
-
+/* Your styling is empty but can be added here */
 </style>
